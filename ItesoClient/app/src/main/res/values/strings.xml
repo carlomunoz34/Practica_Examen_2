@@ -1,0 +1,11 @@
+<resources>
+    <string name="app_name">Iteso Client</string>
+
+    <string name="store">Store:</string>
+    <string name="description">Description:</string>
+
+    <!-- Menu -->
+    <string name="technology">Technology</string>
+    <string name="home">Home</string>
+    <string name="electronics">Electronics</string>
+</resources>
