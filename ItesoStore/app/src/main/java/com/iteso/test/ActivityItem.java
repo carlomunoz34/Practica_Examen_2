@@ -76,10 +76,10 @@ public class ActivityItem extends AppCompatActivity {
                         itemCategory = c;
 
                 ItemProduct newItem = new ItemProduct(itemTitle, itemImage, itemStore, itemCategory);
-                ItemProductControl itemProductControl = new ItemProductControl();
-                itemProductControl.addItemProduct(newItem, dataBaseHandler);
 
                 Intent intent = new Intent(ActivityItem.this, ActivityMain.class);
+                intent.putExtra("ITEM", newItem);
+                setResult(RESULT_OK);
                 startActivity(intent);
                 finish();
             }

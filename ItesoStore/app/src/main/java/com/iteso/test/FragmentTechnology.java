@@ -62,6 +62,17 @@ public class FragmentTechnology extends Fragment {
         return view;
     }
 
+    @Override
+    public void onResume() {
+        super.onResume();
+
+        DataBaseHandler dh = DataBaseHandler.getInstance(getActivity());
+        myDataSet = itemProductControl.getItemProductsByCategory(1, dh);
+
+        mAdapter = new AdapterProduct(getActivity(), myDataSet);
+        recyclerView.setAdapter(mAdapter);
+    }
+
     public void modifyItem(ItemProduct itemProduct, int index) {
         myDataSet.set(index, itemProduct);
         mAdapter = new AdapterProduct(getActivity(), myDataSet);

@@ -59,11 +59,9 @@ public class ActivityMain extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(ActivityMain.this, ActivityItem.class);
-                startActivity(intent);
-
+                startActivityForResult(intent, 0);
             }
         });
-
     }
 
     @Override
@@ -73,6 +71,13 @@ public class ActivityMain extends AppCompatActivity {
             int productIndex = modifiedItem.getCode();
             fragmentTechnology.modifyItem(modifiedItem,productIndex);
 
+        }
+
+        if(requestCode == 0 && resultCode == RESULT_OK && data != null) {
+            ItemProduct newItem = data.getParcelableExtra("ITEM");
+            ItemProductControl itemProductControl = new ItemProductControl();
+            DataBaseHandler dataBaseHandler = DataBaseHandler.getInstance(ActivityMain.this);
+            itemProductControl.addItemProduct(newItem, dataBaseHandler);
         }
     }
 
