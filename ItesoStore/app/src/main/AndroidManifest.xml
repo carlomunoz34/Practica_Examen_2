@@ -2,7 +2,7 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.iteso.test">
 
-    <uses-permission android:name="android.permission.INTERNET"/>
+    <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.CALL_PHONE" />
 
     <application
@@ -25,7 +25,8 @@
             </intent-filter>
         </activity>
         <activity android:name=".ActivityLogin" />
-        <activity android:name=".ActivityPrivacyPolicy"></activity>
+        <activity android:name=".ActivityPrivacyPolicy" />
+        <activity android:name=".ActivityItem"></activity>
     </application>
 
 </manifest>
