@@ -30,7 +30,7 @@ public class AdapterProduct extends RecyclerView.Adapter<AdapterProduct.ViewHold
         public Button mDetail;
         public TextView mProductTitle;
         public TextView mProductStore;
-        public TextView mProductLocation;
+        public TextView mProductCity;
         public TextView mProductPhone;
         public ImageView mProductImage;
         public ImageView mProductThumbnail;
@@ -41,7 +41,7 @@ public class AdapterProduct extends RecyclerView.Adapter<AdapterProduct.ViewHold
             mDetail = v.findViewById(R.id.item_product_detail);
             mProductTitle = v.findViewById(R.id.item_product_title);
             mProductStore = v.findViewById(R.id.item_product_store);
-            mProductLocation = v.findViewById(R.id.item_product_location);
+            mProductCity = v.findViewById(R.id.item_product_location);
             mProductPhone = v.findViewById(R.id.item_product_phone);
             mProductImage = v.findViewById(R.id.item_product_image);
             mProductThumbnail = v.findViewById(R.id.item_product_thumbnail);
@@ -65,7 +65,7 @@ public class AdapterProduct extends RecyclerView.Adapter<AdapterProduct.ViewHold
     public void onBindViewHolder(ViewHolder holder, final int position) {
         holder.mProductTitle.setText(mDataSet.get(position).getTitle());
         holder.mProductStore.setText(mDataSet.get(position).getStore().toString());
-        //holder.mProductLocation.setText(mDataSet.get(position).getLocation());
+        holder.mProductCity.setText(mDataSet.get(position).getStore().getCity().getName());
         //holder.mProductPhone.setText(mDataSet.get(position).getPhone());
         switch(mDataSet.get(position).getImage()){
             case 0:
@@ -84,7 +84,7 @@ public class AdapterProduct extends RecyclerView.Adapter<AdapterProduct.ViewHold
             }
         });
 
-        //Call to phone number
+        /*//Call to phone number
         holder.mProductPhone.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -101,7 +101,7 @@ public class AdapterProduct extends RecyclerView.Adapter<AdapterProduct.ViewHold
                 intent.putExtra("ITEM", itemProduct);
                 ((ActivityMain) context).startActivityForResult(intent, 1);
             }
-        });
+        });*/
     }
 
     @Override

@@ -18,7 +18,7 @@ public class ItemProduct implements Parcelable {
         setCategory(new Category());
     }
 
-    public ItemProduct(int code, String title, String description, Integer image, Store store, Category category) {
+    public ItemProduct(int code, String title, Integer image, Store store, Category category) {
         setCode(code);
         setTitle(title);
         setImage(image);

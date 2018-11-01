@@ -16,7 +16,13 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
+
+import com.iteso.test.beans.Category;
+import com.iteso.test.beans.City;
 import com.iteso.test.beans.ItemProduct;
+import com.iteso.test.beans.Store;
+import com.iteso.test.database.DataBaseHandler;
+import com.iteso.test.database.ItemProductControl;
 
 public class ActivityMain extends AppCompatActivity {
 
@@ -25,6 +31,7 @@ public class ActivityMain extends AppCompatActivity {
     private SectionsPagerAdapter mSectionsPagerAdapter;
     private ViewPager mViewPager;
 
+    public ItemProductControl itemProductControl = new ItemProductControl();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -43,6 +50,8 @@ public class ActivityMain extends AppCompatActivity {
         mViewPager = (ViewPager) findViewById(R.id.container);
         mViewPager.setAdapter(mSectionsPagerAdapter);
         tabLayout.setupWithViewPager(mViewPager);
+
+
 
     }
 

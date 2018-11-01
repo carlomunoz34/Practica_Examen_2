@@ -4,6 +4,7 @@ package com.iteso.test.database;
 import android.content.Context;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
+import android.util.Log;
 
 import com.iteso.test.beans.Category;
 
@@ -92,7 +93,6 @@ public class DataBaseHandler extends SQLiteOpenHelper {
         db.execSQL(tableProduct);
         db.execSQL(tableStoreProduct);
 
-
         String insertCategoryTechnology = "INSERT INTO " + TABLE_CATEGORY + " VALUES(" + 1 + ",'Technology')";
         String insertCategoryHome = "INSERT INTO " + TABLE_CATEGORY + " VALUES(" + 2 + ",'Home')";
         String insertCategoryElectronics = "INSERT INTO " + TABLE_CATEGORY + " VALUES(" + 3 + ",'Electronics')";
@@ -100,7 +100,6 @@ public class DataBaseHandler extends SQLiteOpenHelper {
         db.execSQL(insertCategoryTechnology);
         db.execSQL(insertCategoryHome);
         db.execSQL(insertCategoryElectronics);
-
 
         String insertCity1 = "INSERT INTO "+ TABLE_CITY +" VALUES("+ 1 +",'Guadalajara')";
         String insertCity2 = "INSERT INTO "+ TABLE_CITY +" VALUES("+ 2 +",'CDMX')";

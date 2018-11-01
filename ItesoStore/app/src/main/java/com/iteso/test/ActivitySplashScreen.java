@@ -7,10 +7,13 @@ import android.os.Bundle;
 import android.util.Log;
 import android.widget.Toast;
 
+import com.iteso.test.beans.Category;
 import com.iteso.test.beans.City;
+import com.iteso.test.beans.ItemProduct;
 import com.iteso.test.beans.Store;
 import com.iteso.test.beans.User;
 import com.iteso.test.database.DataBaseHandler;
+import com.iteso.test.database.ItemProductControl;
 import com.iteso.test.database.StoreControl;
 
 import java.util.ArrayList;
@@ -22,6 +25,7 @@ public class ActivitySplashScreen extends AppCompatActivity {
     public static final String MY_PREFERENCES = "com.iteso.sesion13.PREFERENCES";
 
     public StoreControl storeControl = new StoreControl();
+    public ItemProductControl itemProductControl = new ItemProductControl();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -64,7 +68,7 @@ public class ActivitySplashScreen extends AppCompatActivity {
             }
         };
         Timer timer = new Timer();
-        timer.schedule(task, 5000);
+        timer.schedule(task, 2000);
 
 
     }

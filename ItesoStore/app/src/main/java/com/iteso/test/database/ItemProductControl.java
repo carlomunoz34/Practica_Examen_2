@@ -12,6 +12,7 @@ public class ItemProductControl {
 
     public CategoryControl categoryControl = new CategoryControl();
     public StoreControl storeControl = new StoreControl();
+    private int nextId = 0;
 
     public void addItemProduct(ItemProduct itemProduct, DataBaseHandler dh){
         SQLiteDatabase db = dh.getWritableDatabase();
@@ -27,9 +28,16 @@ public class ItemProductControl {
         values.clear();
 
         //Llenado de la tabla STOREPRODUCTS
-        values.put(DataBaseHandler.STOREPRODUCT_ID, itemProduct.getStore().getId());
+        String getCount = "SELECT COUNT(" + DataBaseHandler.STOREPRODUCT_ID
+                + ") FROM " + DataBaseHandler.TABLE_STOREPRODUCT;
+
+        Cursor cursor = db.rawQuery(getCount, null);
+        cursor.moveToNext();
+        nextId = cursor.getInt(0) + 1;
+        values.put(DataBaseHandler.STOREPRODUCT_ID, nextId);
         values.put(DataBaseHandler.STOREPRODUCT_IDPRODUCT, itemProduct.getCode());
         values.put(DataBaseHandler.STOREPRODUCT_IDSTORE, itemProduct.getStore().getId());
+        db.insert(DataBaseHandler.TABLE_STOREPRODUCT,null,values);
 
         try{
             db.close();
@@ -51,6 +59,7 @@ public class ItemProductControl {
                 + DataBaseHandler.TABLE_STOREPRODUCT + " sp ON p."
                 + DataBaseHandler.PRODUCT_IDPRODUCT + " = sp." + DataBaseHandler.STOREPRODUCT_IDPRODUCT
                 + " WHERE " + DataBaseHandler.PRODUCT_IDCATEGORY + " = "+ idCategory;
+
 
         Cursor cursor = db.rawQuery(select, null);
 
