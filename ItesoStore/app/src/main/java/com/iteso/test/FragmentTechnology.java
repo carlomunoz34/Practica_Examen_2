@@ -47,7 +47,7 @@ public class FragmentTechnology extends Fragment {
                 3,25.6714,-100.3040, new City(3, "Monterrey"));
 
 
-        /////  PRUEBAS
+        //  PRUEBAS
         ItemProduct itemProduct1 = new ItemProduct(1, "Laptop 1", 1, guadalajaraStore, new Category(1, "Technology"));
         ItemProduct itemProduct2 = new ItemProduct(2, "Laptop 1", 1, monterreyStore, new Category(1, "Technology"));
         ItemProduct itemProduct3 = new ItemProduct(3, "Laptop 2", 2, guadalajaraStore, new Category(1, "Technology"));

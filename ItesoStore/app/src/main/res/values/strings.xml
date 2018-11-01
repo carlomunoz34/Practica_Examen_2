@@ -24,4 +24,14 @@
 
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
+
+    <string name="activity_item_save">Save</string>
+    <string name="activity_item_title_hint">Add title</string>
+
+    <string-array name="images">
+        <item>Alienware</item>
+        <item>Mac</item>
+        <item>House</item>
+        <item>Micro</item>
+    </string-array>
 </resources>

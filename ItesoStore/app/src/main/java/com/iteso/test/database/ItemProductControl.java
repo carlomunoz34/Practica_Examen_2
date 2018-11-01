@@ -19,7 +19,10 @@ public class ItemProductControl {
         ContentValues values = new ContentValues();
 
         //Llenado de la tabla PRODUCTS
-        values.put(DataBaseHandler.PRODUCT_IDPRODUCT, itemProduct.getCode());
+        String getCountProduct = "SELECT COUNT(" + DataBaseHandler.PRODUCT_IDPRODUCT
+                + ") FROM " + DataBaseHandler.TABLE_PRODUCT;
+
+        values.put(DataBaseHandler.PRODUCT_IDPRODUCT, getCountProduct);
         values.put(DataBaseHandler.PRODUCT_TITLE, itemProduct.getTitle());
         values.put(DataBaseHandler.PRODUCT_IMAGE, itemProduct.getImage());
         values.put(DataBaseHandler.PRODUCT_IDCATEGORY, itemProduct.getCategory().getId());
@@ -28,10 +31,10 @@ public class ItemProductControl {
         values.clear();
 
         //Llenado de la tabla STOREPRODUCTS
-        String getCount = "SELECT COUNT(" + DataBaseHandler.STOREPRODUCT_ID
+        String getCountStoreProduct = "SELECT COUNT(" + DataBaseHandler.STOREPRODUCT_ID
                 + ") FROM " + DataBaseHandler.TABLE_STOREPRODUCT;
 
-        Cursor cursor = db.rawQuery(getCount, null);
+        Cursor cursor = db.rawQuery(getCountStoreProduct, null);
         cursor.moveToNext();
         nextId = cursor.getInt(0) + 1;
         values.put(DataBaseHandler.STOREPRODUCT_ID, nextId);

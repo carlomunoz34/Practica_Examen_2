@@ -34,6 +34,14 @@ public class ItemProduct implements Parcelable {
         this.category = in.readParcelable(Category.class.getClassLoader());
     }
 
+    public ItemProduct(String title, Integer image, Store store, Category category) {
+        this.title = title;
+        this.image = image;
+        this.store = store;
+        this.category = category;
+        setCode(0);
+    }
+
     //Getters & Setters
     public int getCode() {
         return code;
