@@ -41,8 +41,21 @@ public class AdapterItem extends RecyclerView.Adapter<AdapterItem.ViewHolder> {
         holder.store.setText(String.format("%s %s",
                 context.getResources().getString(R.string.store), mDataSet.get(i).getStore()));
 
-        holder.description.setText(String.format("%s %s",
-                context.getResources().getString(R.string.description), mDataSet.get(i).getDescription()));
+        String itemCategory = null;
+        switch (mDataSet.get(i).getCategory()){
+            case 1:
+                itemCategory = context.getResources().getString(R.string.technology);
+                break;
+            case 2:
+                itemCategory = context.getResources().getString(R.string.home);
+                break;
+            case 3:
+                itemCategory = context.getResources().getString(R.string.electronics);
+                break;
+        }
+        holder.category.setText(String.format("%s %s",
+                context.getResources().getString(R.string.category), itemCategory));
+
     }
 
     @Override
@@ -51,13 +64,13 @@ public class AdapterItem extends RecyclerView.Adapter<AdapterItem.ViewHolder> {
     }
 
     public static class ViewHolder extends RecyclerView.ViewHolder {
-        public TextView title, store, description;
+        public TextView title, store, category;
 
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
-            title = itemView.findViewById(R.id.product_title);
-            store = itemView.findViewById(R.id.product_store);
-            description = itemView.findViewById(R.id.product_description);
+            title    = itemView.findViewById(R.id.product_title);
+            store    = itemView.findViewById(R.id.product_store);
+            category = itemView.findViewById(R.id.product_category);
         }
     }
 }

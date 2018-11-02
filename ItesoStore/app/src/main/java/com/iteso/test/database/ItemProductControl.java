@@ -94,4 +94,21 @@ public class ItemProductControl {
 
         return itemProducts;
     }
+
+    public Cursor getItemProducts(DataBaseHandler dh){
+        SQLiteDatabase db = dh.getReadableDatabase();
+
+        String select = "SELECT p."
+                + DataBaseHandler.PRODUCT_TITLE + ","
+                + DataBaseHandler.STORE_NAME + ","
+                + DataBaseHandler.PRODUCT_IDCATEGORY
+                + " FROM " + DataBaseHandler.TABLE_PRODUCT +
+                " p JOIN " + DataBaseHandler.TABLE_STOREPRODUCT +
+                " sp ON p." + DataBaseHandler.PRODUCT_IDPRODUCT + " = sp." + DataBaseHandler.STOREPRODUCT_IDPRODUCT +
+                " JOIN " + DataBaseHandler.TABLE_STORE + " st ON sp." + DataBaseHandler.STOREPRODUCT_ID + " = st." +
+                DataBaseHandler.STORE_ID;
+
+
+        return db.rawQuery(select, null);
+    }
 }

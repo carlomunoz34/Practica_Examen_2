@@ -26,7 +26,13 @@
         </activity>
         <activity android:name=".ActivityLogin" />
         <activity android:name=".ActivityPrivacyPolicy" />
-        <activity android:name=".ActivityItem"></activity>
+        <activity android:name=".ActivityItem" />
+
+        <provider
+            android:name=".tools.ItesoStoreContentProvider"
+            android:authorities="com.iteso.test.PROVIDER"
+            android:enabled="true"
+            android:exported="true"></provider>
     </application>
 
 </manifest>

@@ -15,4 +15,9 @@
         android:id="@+id/menu_electronics"
         android:title="@string/electronics"
         app:showAsAction="never"/>
+
+    <item
+        android:id="@+id/menu_refresh"
+        android:title="@string/refresh"
+        app:showAsAction="never"/>
 </menu>

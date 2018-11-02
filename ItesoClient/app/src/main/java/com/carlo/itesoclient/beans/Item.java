@@ -1,13 +1,16 @@
 package com.carlo.itesoclient.beans;
 
 public class Item {
-    private String title, category, store, description;
+    private String title, store;
+    private int category;
 
-    public Item(String title, String category, String store, String description) {
+    public Item() {
+    }
+
+    public Item(String title, int category, String store) {
         this.title = title;
         this.category = category;
         this.store = store;
-        this.description = description;
     }
 
     public String getTitle() {
@@ -18,11 +21,11 @@ public class Item {
         this.title = title;
     }
 
-    public String getCategory() {
+    public int getCategory() {
         return category;
     }
 
-    public void setCategory(String category) {
+    public void setCategory(int category) {
         this.category = category;
     }
 
@@ -32,14 +35,6 @@ public class Item {
 
     public void setStore(String store) {
         this.store = store;
-    }
-
-    public String getDescription() {
-        return description;
-    }
-
-    public void setDescription(String description) {
-        this.description = description;
     }
 
 }

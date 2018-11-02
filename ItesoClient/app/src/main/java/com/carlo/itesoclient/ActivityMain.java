@@ -1,6 +1,10 @@
 package com.carlo.itesoclient;
 
+import android.content.ContentResolver;
+import android.database.Cursor;
+import android.net.Uri;
 import android.os.Bundle;
+import android.provider.ContactsContract;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -26,14 +30,34 @@ public class ActivityMain extends AppCompatActivity {
         recyclerView.setHasFixedSize(true);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
 
+        update();
+    }
+
+    private void update() {
         productsTechnology = new ArrayList<>();
         productsHome = new ArrayList<>();
         productsElectronics = new ArrayList<>();
         products = new ArrayList<>();
 
-        products.add(new Item("Hola", "TECHNOLOGY", "Farmacias Guadalajara", "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Quisque quis neque odio. Quisque ut scelerisque sapien. Integer tempor ligula eget."));
-        products.add(new Item("Mundo", "HOME", "Electra", "Lorem ipsum dolor sit amet, consectetur adipiscing elit."));
-        products.add(new Item("Cruel", "ELECTRONICS", "Coppel", "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Quisque quis neque odio."));
+        Uri uri = Uri.parse("content://com.iteso.test.PROVIDER");
+        String[] projection = {"Products"};
+
+        ContentResolver resolver = getContentResolver();
+        Cursor cursor = resolver.query(uri, projection, null, null);
+
+        while(cursor.moveToNext()){
+            String itemTitle = cursor.getString(0);
+            String itemStore = cursor.getString(1);
+            int itemCategory = cursor.getInt(2);
+
+            products.add(new Item(itemTitle, itemCategory, itemStore));
+        }
+
+        try{
+            cursor.close();
+        }catch (Exception e){
+
+        }
 
         sortProductsInCategories();
 
@@ -44,13 +68,13 @@ public class ActivityMain extends AppCompatActivity {
     private void sortProductsInCategories() {
         for (Item item : products) {
             switch (item.getCategory()) {
-                case "TECHNOLOGY":
+                case 1:
                     productsTechnology.add(item);
                     break;
-                case "HOME":
+                case 2:
                     productsHome.add(item);
                     break;
-                case "ELECTRONICS":
+                case 3:
                     productsElectronics.add(item);
                     break;
             }
@@ -74,6 +98,9 @@ public class ActivityMain extends AppCompatActivity {
                 break;
             case R.id.menu_electronics:
                 adapterItem.setmDataSet(productsElectronics);
+                break;
+            case R.id.menu_refresh:
+                update();
                 break;
         }
         recyclerView.setAdapter(adapterItem);
