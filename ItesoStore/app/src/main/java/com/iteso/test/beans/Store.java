@@ -88,15 +88,7 @@ public class Store implements Parcelable {
 
     @Override
     public String toString() {
-        return "Store{" +
-                "id=" + id +
-                ", name='" + name + '\'' +
-                ", phone='" + phone + '\'' +
-                ", thumbnail=" + thumbnail +
-                ", latitude=" + latitude +
-                ", longitude=" + longitude +
-                ", city=" + city +
-                '}';
+        return name;
     }
 
 

@@ -11,23 +11,24 @@ import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
 import android.support.v4.view.ViewPager;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
+import android.widget.Toast;
 
-import com.iteso.test.beans.Category;
-import com.iteso.test.beans.City;
 import com.iteso.test.beans.ItemProduct;
-import com.iteso.test.beans.Store;
 import com.iteso.test.database.DataBaseHandler;
 import com.iteso.test.database.ItemProductControl;
 
 public class ActivityMain extends AppCompatActivity {
 
     private FragmentTechnology fragmentTechnology;
+    private FragmentHome fragmentHome;
+    private FragmentElectronics fragmentElectronics;
 
     private SectionsPagerAdapter mSectionsPagerAdapter;
     private ViewPager mViewPager;
@@ -59,25 +60,29 @@ public class ActivityMain extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(ActivityMain.this, ActivityItem.class);
-                startActivityForResult(intent, 0);
+                startActivityForResult(intent, 1);
+
             }
         });
+
     }
+
 
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data){
-        if(requestCode == 1 && resultCode == RESULT_OK && data != null){
-            ItemProduct modifiedItem = data.getParcelableExtra("ITEM");
-            int productIndex = modifiedItem.getCode();
-            fragmentTechnology.modifyItem(modifiedItem,productIndex);
-
-        }
-
-        if(requestCode == 0 && resultCode == RESULT_OK && data != null) {
+        if(requestCode == 1 && resultCode == RESULT_OK && data != null) {
             ItemProduct newItem = data.getParcelableExtra("ITEM");
             ItemProductControl itemProductControl = new ItemProductControl();
-            DataBaseHandler dataBaseHandler = DataBaseHandler.getInstance(ActivityMain.this);
-            itemProductControl.addItemProduct(newItem, dataBaseHandler);
+            DataBaseHandler dh = DataBaseHandler.getInstance(ActivityMain.this);
+            itemProductControl.addItemProduct(newItem, dh);
+
+            Log.e("DB","Añadido a BD");
+
+
+            fragmentTechnology.updateList();
+            fragmentHome.updateList();
+            //fragmentElectronics.updateList();
+
         }
     }
 
@@ -118,8 +123,12 @@ public class ActivityMain extends AppCompatActivity {
                 case 0: if(fragmentTechnology == null)
                     fragmentTechnology = new FragmentTechnology();
                     return fragmentTechnology;
-                case 1:  return new FragmentHome();
-                case 2:  return new FragmentElectronics();
+                case 1:  if(fragmentHome == null)
+                    fragmentHome = new FragmentHome();
+                    return fragmentHome;
+                case 2:  if(fragmentElectronics == null)
+                    fragmentElectronics = new FragmentElectronics();
+                    return fragmentElectronics;
                 default: return new FragmentTechnology();
             }
         }

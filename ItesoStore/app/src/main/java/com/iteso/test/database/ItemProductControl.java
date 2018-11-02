@@ -3,6 +3,7 @@ package com.iteso.test.database;
 import android.content.ContentValues;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
+import android.util.Log;
 
 import com.iteso.test.beans.ItemProduct;
 
@@ -12,7 +13,8 @@ public class ItemProductControl {
 
     public CategoryControl categoryControl = new CategoryControl();
     public StoreControl storeControl = new StoreControl();
-    private int nextId = 0;
+    private int nextIdStoreProducts = 0;
+    private int nextIdProducts = 0;
 
     public void addItemProduct(ItemProduct itemProduct, DataBaseHandler dh){
         SQLiteDatabase db = dh.getWritableDatabase();
@@ -21,8 +23,12 @@ public class ItemProductControl {
         //Llenado de la tabla PRODUCTS
         String getCountProduct = "SELECT COUNT(" + DataBaseHandler.PRODUCT_IDPRODUCT
                 + ") FROM " + DataBaseHandler.TABLE_PRODUCT;
+        Cursor cursor_nip = db.rawQuery(getCountProduct, null);
+        cursor_nip.moveToNext();
+        nextIdProducts = cursor_nip.getInt(0) + 1;
 
-        values.put(DataBaseHandler.PRODUCT_IDPRODUCT, getCountProduct);
+        itemProduct.setCode(nextIdProducts);
+        values.put(DataBaseHandler.PRODUCT_IDPRODUCT, nextIdProducts);
         values.put(DataBaseHandler.PRODUCT_TITLE, itemProduct.getTitle());
         values.put(DataBaseHandler.PRODUCT_IMAGE, itemProduct.getImage());
         values.put(DataBaseHandler.PRODUCT_IDCATEGORY, itemProduct.getCategory().getId());
@@ -34,13 +40,16 @@ public class ItemProductControl {
         String getCountStoreProduct = "SELECT COUNT(" + DataBaseHandler.STOREPRODUCT_ID
                 + ") FROM " + DataBaseHandler.TABLE_STOREPRODUCT;
 
-        Cursor cursor = db.rawQuery(getCountStoreProduct, null);
-        cursor.moveToNext();
-        nextId = cursor.getInt(0) + 1;
-        values.put(DataBaseHandler.STOREPRODUCT_ID, nextId);
+        Cursor cursor_nisp = db.rawQuery(getCountStoreProduct, null);
+        cursor_nisp.moveToNext();
+        nextIdStoreProducts = cursor_nisp.getInt(0) + 1;
+        values.put(DataBaseHandler.STOREPRODUCT_ID, nextIdStoreProducts);
         values.put(DataBaseHandler.STOREPRODUCT_IDPRODUCT, itemProduct.getCode());
         values.put(DataBaseHandler.STOREPRODUCT_IDSTORE, itemProduct.getStore().getId());
         db.insert(DataBaseHandler.TABLE_STOREPRODUCT,null,values);
+
+        Log.e("DB","StoreProducts: "+(nextIdStoreProducts) + "elemento.");
+        Log.e("DB","Products: "+ (nextIdProducts) + "elemento.");
 
         try{
             db.close();

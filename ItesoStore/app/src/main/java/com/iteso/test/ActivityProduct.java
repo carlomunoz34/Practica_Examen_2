@@ -37,6 +37,8 @@ public class ActivityProduct extends AppCompatActivity {
          switch(itemProduct.getImage()){
             case 0: image.setImageResource(R.drawable.mac); break;
             case 1: image.setImageResource((R.drawable.alienware)); break;
+            case 2: image.setImageResource((R.drawable.home)); break;
+            case 3: image.setImageResource((R.drawable.micro)); break;
             default:image.setImageResource(R.drawable.mac); break;
         }
     }

@@ -1,5 +1,6 @@
 package com.iteso.test;
 
+import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
@@ -8,6 +9,7 @@ import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Spinner;
+import android.widget.Toast;
 
 import com.iteso.test.beans.Category;
 import com.iteso.test.beans.ItemProduct;
@@ -29,7 +31,7 @@ public class ActivityItem extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_item);
 
-        final DataBaseHandler dataBaseHandler = DataBaseHandler.getInstance(this);
+        final DataBaseHandler dh = DataBaseHandler.getInstance(this);
         final StoreControl storeControl = new StoreControl();
         CategoryControl categoryControl = new CategoryControl();
 
@@ -40,8 +42,8 @@ public class ActivityItem extends AppCompatActivity {
         save = findViewById(R.id.activity_item_save);
 
         final String[] images = getResources().getStringArray(R.array.images);
-        final ArrayList<Category> categoriesAsItem = categoryControl.getCategories(dataBaseHandler);
-        final ArrayList<Store> storesAsItems = storeControl.getStores(dataBaseHandler);
+        final ArrayList<Category> categoriesAsItem = categoryControl.getCategories(dh);
+        final ArrayList<Store> storesAsItems = storeControl.getStores(dh);
 
         final ArrayList<String> categories = new ArrayList<>(), stores = new ArrayList<>();
         for(Category category : categoriesAsItem)
@@ -75,12 +77,12 @@ public class ActivityItem extends AppCompatActivity {
                     if(c.getName().equals(category.getSelectedItem().toString()))
                         itemCategory = c;
 
-                ItemProduct newItem = new ItemProduct(itemTitle, itemImage, itemStore, itemCategory);
+                ItemProduct itemProduct = new ItemProduct(itemTitle, itemImage, itemStore, itemCategory);
+                //Toast.makeText(ActivityItem.this, itemProduct.toString(), Toast.LENGTH_LONG).show();
 
-                Intent intent = new Intent(ActivityItem.this, ActivityMain.class);
-                intent.putExtra("ITEM", newItem);
-                setResult(RESULT_OK);
-                startActivity(intent);
+                Intent intent = new Intent();
+                intent.putExtra("ITEM",itemProduct);
+                setResult(Activity.RESULT_OK,intent);
                 finish();
             }
         });
