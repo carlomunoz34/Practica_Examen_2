@@ -69,14 +69,14 @@ public class ActivityMain extends AppCompatActivity {
 
 
     @Override
-    protected void onActivityResult(int requestCode, int resultCode, Intent data){
-        if(requestCode == 1 && resultCode == RESULT_OK && data != null) {
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        if (requestCode == 1 && resultCode == RESULT_OK && data != null) {
             ItemProduct newItem = data.getParcelableExtra("ITEM");
             ItemProductControl itemProductControl = new ItemProductControl();
             DataBaseHandler dh = DataBaseHandler.getInstance(ActivityMain.this);
             itemProductControl.addItemProduct(newItem, dh);
 
-            Log.e("DB","Añadido a BD");
+            Log.e("DB", "Añadido a BD");
 
 
             fragmentTechnology.updateList();
@@ -88,7 +88,7 @@ public class ActivityMain extends AppCompatActivity {
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
-        switch(item.getItemId()){
+        switch (item.getItemId()) {
             case R.id.menu_log_out:
                 SharedPreferences sharedPreferences = getSharedPreferences(ActivitySplashScreen.MY_PREFERENCES, MODE_PRIVATE);
                 SharedPreferences.Editor editor = sharedPreferences.edit();
@@ -108,7 +108,7 @@ public class ActivityMain extends AppCompatActivity {
                 Intent intent = new Intent(ActivityMain.this, ActivityPrivacyPolicy.class);
                 startActivity(intent);
                 break;
-    }
+        }
         return true;
     }
 
@@ -119,17 +119,21 @@ public class ActivityMain extends AppCompatActivity {
 
         @Override
         public Fragment getItem(int position) {
-            switch(position){
-                case 0: if(fragmentTechnology == null)
-                    fragmentTechnology = new FragmentTechnology();
+            switch (position) {
+                case 0:
+                    if (fragmentTechnology == null)
+                        fragmentTechnology = new FragmentTechnology();
                     return fragmentTechnology;
-                case 1:  if(fragmentHome == null)
-                    fragmentHome = new FragmentHome();
+                case 1:
+                    if (fragmentHome == null)
+                        fragmentHome = new FragmentHome();
                     return fragmentHome;
-                case 2:  if(fragmentElectronics == null)
-                    fragmentElectronics = new FragmentElectronics();
+                case 2:
+                    if (fragmentElectronics == null)
+                        fragmentElectronics = new FragmentElectronics();
                     return fragmentElectronics;
-                default: return new FragmentTechnology();
+                default:
+                    return new FragmentTechnology();
             }
         }
 
@@ -140,11 +144,15 @@ public class ActivityMain extends AppCompatActivity {
 
         @Override
         public CharSequence getPageTitle(int position) {
-            switch (position){
-                case 0:  return getString(R.string.technology_header);
-                case 1:  return getString(R.string.home_header);
-                case 2:  return getString(R.string.electronics_header);
-                default: return getString(R.string.technology_header);
+            switch (position) {
+                case 0:
+                    return getString(R.string.technology_header);
+                case 1:
+                    return getString(R.string.home_header);
+                case 2:
+                    return getString(R.string.electronics_header);
+                default:
+                    return getString(R.string.technology_header);
             }
         }
     }
@@ -160,6 +168,7 @@ public class ActivityMain extends AppCompatActivity {
 
         public PlaceholderFragment() {
         }
+
         public static PlaceholderFragment newInstance(int sectionNumber) {
             PlaceholderFragment fragment = new PlaceholderFragment();
             Bundle args = new Bundle();
@@ -167,6 +176,7 @@ public class ActivityMain extends AppCompatActivity {
             fragment.setArguments(args);
             return fragment;
         }
+
         @Override
         public View onCreateView(LayoutInflater inflater, ViewGroup container,
                                  Bundle savedInstanceState) {

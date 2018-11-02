@@ -5,6 +5,7 @@ import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.drawable.BitmapDrawable;
 import android.net.Uri;
+import android.support.annotation.NonNull;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -26,7 +27,7 @@ public class AdapterProduct extends RecyclerView.Adapter<AdapterProduct.ViewHold
 
 
     //ViewHolder class
-    public static class ViewHolder extends RecyclerView.ViewHolder{
+    public static class ViewHolder extends RecyclerView.ViewHolder {
         public Button mDetail;
         public TextView mProductTitle;
         public TextView mProductStore;
@@ -35,7 +36,8 @@ public class AdapterProduct extends RecyclerView.Adapter<AdapterProduct.ViewHold
         public ImageView mProductImage;
         public ImageView mProductThumbnail;
         public RelativeLayout mEventLayout;
-        public ViewHolder(View v){
+
+        public ViewHolder(View v) {
             super(v);
             mEventLayout = v.findViewById(R.id.item_product_layout);
             mDetail = v.findViewById(R.id.item_product_detail);
@@ -49,31 +51,39 @@ public class AdapterProduct extends RecyclerView.Adapter<AdapterProduct.ViewHold
     }
 
     //Constructor
-    public AdapterProduct(Context context, ArrayList<ItemProduct> myDataSet){
+    public AdapterProduct(Context context, ArrayList<ItemProduct> myDataSet) {
         this.mDataSet = myDataSet;
         this.context = context;
     }
 
     //Create new views
-   public AdapterProduct.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType){
-        View v = LayoutInflater.from(parent.getContext()).inflate(R.layout.item_product, parent,false);
-        ViewHolder vh = new ViewHolder(v);
-        return vh;
-   }
+    @NonNull
+    public AdapterProduct.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+        View v = LayoutInflater.from(parent.getContext()).inflate(R.layout.item_product, parent, false);
+        return new ViewHolder(v);
+    }
 
     @Override
-    public void onBindViewHolder(ViewHolder holder, final int position) {
+    public void onBindViewHolder(@NonNull ViewHolder holder, final int position) {
         holder.mProductTitle.setText(mDataSet.get(position).getTitle());
         holder.mProductStore.setText(mDataSet.get(position).getStore().toString());
         holder.mProductCity.setText(mDataSet.get(position).getStore().getCity().getName());
         //holder.mProductPhone.setText(mDataSet.get(position).getPhone());
-        switch(mDataSet.get(position).getImage()){
+        switch (mDataSet.get(position).getImage()) {
             case 0:
-                holder.mProductImage.setImageResource(R.drawable.mac); break;
+                holder.mProductImage.setImageResource(R.drawable.mac);
+                break;
             case 1:
-                holder.mProductImage.setImageResource(R.drawable.alienware); break;
+                holder.mProductImage.setImageResource(R.drawable.alienware);
+                break;
+            case 3:
+                holder.mProductImage.setImageResource(R.drawable.home);
+                break;
+            case 4:
+                holder.mProductImage.setImageResource(R.drawable.micro);
+                break;
         }
-        Bitmap bitmap = ((BitmapDrawable)holder.mProductThumbnail.getDrawable()).getBitmap();
+        Bitmap bitmap = ((BitmapDrawable) holder.mProductThumbnail.getDrawable()).getBitmap();
         holder.mProductThumbnail.setImageBitmap(bitmap);
 
         //Show Items Info
