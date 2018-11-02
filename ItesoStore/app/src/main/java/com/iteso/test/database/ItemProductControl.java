@@ -43,13 +43,14 @@ public class ItemProductControl {
         Cursor cursor_nisp = db.rawQuery(getCountStoreProduct, null);
         cursor_nisp.moveToNext();
         nextIdStoreProducts = cursor_nisp.getInt(0) + 1;
+
         values.put(DataBaseHandler.STOREPRODUCT_ID, nextIdStoreProducts);
         values.put(DataBaseHandler.STOREPRODUCT_IDPRODUCT, itemProduct.getCode());
         values.put(DataBaseHandler.STOREPRODUCT_IDSTORE, itemProduct.getStore().getId());
         db.insert(DataBaseHandler.TABLE_STOREPRODUCT,null,values);
 
-        Log.e("DB","StoreProducts: "+(nextIdStoreProducts) + "elemento.");
-        Log.e("DB","Products: "+ (nextIdProducts) + "elemento.");
+        Log.e("DB","StoreProducts: "+(nextIdStoreProducts) + " elemento(s).");
+        Log.e("DB","Products: "+ (nextIdProducts) + " elemento(s).");
 
         try{
             db.close();
